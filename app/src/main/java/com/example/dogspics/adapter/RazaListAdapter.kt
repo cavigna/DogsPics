@@ -1,12 +1,16 @@
 package com.example.dogspics.adapter
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.dogspics.R
 import com.example.dogspics.databinding.ItemRowBinding
+import com.example.dogspics.fragments.ui.DetailsFragmentArgs
 import com.example.dogspics.model.ListadoRazaDB
 
 class RazaListAdapter : ListAdapter<ListadoRazaDB, RazaViewHolder>(RazaComparator()) {
@@ -24,6 +28,14 @@ class RazaListAdapter : ListAdapter<ListadoRazaDB, RazaViewHolder>(RazaComparato
 
         with(holder){
             hacedorBotones(raza)
+            binding.buttonRaza.setOnClickListener {
+               //Navigation.findNavController(itemView).navigate(R.id.action_listFragment_to_detailsFragment)
+                 val bundle = Bundle()
+                bundle.putString("raza", raza.raza)
+
+                Navigation.findNavController(itemView).navigate(R.id.action_listFragment_to_detailsFragment, bundle)
+
+            }
         }
     }
 }

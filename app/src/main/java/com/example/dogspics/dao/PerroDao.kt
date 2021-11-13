@@ -1,11 +1,9 @@
 package com.example.dogspics.dao
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.example.dogspics.model.ListadoRazaDB
+import com.example.dogspics.model.PerroFavorito
 import kotlinx.coroutines.flow.Flow
 
 
@@ -17,4 +15,14 @@ interface PerroDao {
 
     @Query("SELECT * FROM listado_razas")
     fun listadoDeRazaDB(): Flow<List<ListadoRazaDB>>
+
+    @Insert
+    suspend fun agregarFavorito(perroFavorito: PerroFavorito)
+
+    @Delete
+    suspend fun eliminarFavorito(perroFavorito: PerroFavorito)
+
+    @Query("SELECT * FROM favoritos")
+    fun listadoDeFavoritos():Flow<List<PerroFavorito>>
+
 }

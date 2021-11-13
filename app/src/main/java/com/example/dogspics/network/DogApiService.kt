@@ -10,6 +10,6 @@ interface DogApiService {
     @GET("breeds/list") ///breed/
     suspend fun listadoPerroAPI(): ListadoRazasAPI
 
-    @GET("/breed/{nombreRaza}/images")
+    @GET("breed/{nombreRaza}/images")
     suspend fun imagenesPorRaza(@Path("nombreRaza") nombreRaza:String) : PerroImagenes
 }

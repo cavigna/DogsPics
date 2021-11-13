@@ -2,6 +2,7 @@ package com.example.dogspics.repository
 
 import com.example.dogspics.dao.PerroDao
 import com.example.dogspics.model.ListadoRazaDB
+import com.example.dogspics.model.PerroFavorito
 import com.example.dogspics.network.DogApiService
 
 class Repositorio(private val api: DogApiService, private val dao: PerroDao) {
@@ -13,4 +14,9 @@ class Repositorio(private val api: DogApiService, private val dao: PerroDao) {
     = dao.agregarListadoRazasDB(listadoPerro)
 
     fun listadoRazasDB() = dao.listadoDeRazaDB()
+
+    suspend fun agegarFavorito(perro: PerroFavorito) = dao.agregarFavorito(perro)
+    suspend fun borrarFavorito(perro: PerroFavorito) = dao.eliminarFavorito(perro)
+
+    fun listadoFavoritos() = dao.listadoDeFavoritos()
 }

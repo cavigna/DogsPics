@@ -6,9 +6,10 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.dogspics.dao.PerroDao
 import com.example.dogspics.model.ListadoRazaDB
+import com.example.dogspics.model.PerroFavorito
 
 
-@Database(entities = [ListadoRazaDB::class], version = 1, exportSchema = false)
+@Database(entities = [ListadoRazaDB::class, PerroFavorito::class], version = 1, exportSchema = false)
 abstract class BaseDeDatos : RoomDatabase() {
     abstract fun dao() : PerroDao
 

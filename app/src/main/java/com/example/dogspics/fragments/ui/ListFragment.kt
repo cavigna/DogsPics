@@ -46,6 +46,9 @@ class ListFragment : Fragment() {
 
         viewModel.listadoRazaDB.observe(viewLifecycleOwner, {
              adapter.submitList(it)
+
+            viewModel.razaSeleccionada = adapter.nombreRazaElegida
+
         })
 
 
