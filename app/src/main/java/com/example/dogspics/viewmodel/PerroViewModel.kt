@@ -2,6 +2,7 @@ package com.example.dogspics.viewmodel
 
 import androidx.lifecycle.*
 import com.example.dogspics.model.ListadoRazaDB
+import com.example.dogspics.model.PerroFavorito
 import com.example.dogspics.model.PerroImagenes
 import com.example.dogspics.repository.Repositorio
 import kotlinx.coroutines.Dispatchers.IO
@@ -15,7 +16,13 @@ class PerroViewModel(private val repositorio: Repositorio) : ViewModel() {
     private var _listadoImagenesPorRaza = MutableLiveData<PerroImagenes>()
     val listadoImagenesPorRaza: LiveData<PerroImagenes> = _listadoImagenesPorRaza
 
+    val listadoFavorito = repositorio.listadoFavoritos().asLiveData()
+
     var razaSeleccionada = ""
+
+    init {
+        agregarListadoRaza()
+    }
 
     fun imagenesPorRaza(nombreRaza:String){
 
@@ -44,5 +51,21 @@ class PerroViewModel(private val repositorio: Repositorio) : ViewModel() {
 
         }
     }
+
+    fun agregarFavorito(perro: PerroFavorito){
+
+        viewModelScope.launch {
+            repositorio.agegarFavorito(perro)
+        }
+
+    }
+
+    fun borrarFavorito(perro: PerroFavorito){
+        viewModelScope.launch {
+            repositorio.borrarFavorito(perro)
+        }
+    }
+
+
 
 }

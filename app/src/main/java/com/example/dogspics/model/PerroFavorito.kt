@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "favoritos")
 data class PerroFavorito(
     @PrimaryKey(autoGenerate = true)
-    var id : Int,
+    var id : Int = 0,
     val raza: String,
     val imagenUrl : String,
 

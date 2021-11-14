@@ -38,6 +38,10 @@ class RazaListAdapter : ListAdapter<ListadoRazaDB, RazaViewHolder>(RazaComparato
             }
         }
     }
+
+    interface miEscuchadorRaza{
+        fun alHacerClick(raza: String)
+    }
 }
 
 

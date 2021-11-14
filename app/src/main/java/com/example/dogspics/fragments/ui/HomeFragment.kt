@@ -35,7 +35,7 @@ class HomeFragment : Fragment() {
     ): View? {
         binding = FragmentHomeBinding.inflate(layoutInflater, container, false)
 
-        viewModel.agregarListadoRaza()
+
 
         return binding.root
 

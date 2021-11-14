@@ -28,4 +28,9 @@
             android:name="nombreRaza"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/favFragment"
+        android:name="com.example.dogspics.fragments.ui.FavFragment"
+        android:label="fragment_fav"
+        tools:layout="@layout/fragment_fav" />
 </navigation>
