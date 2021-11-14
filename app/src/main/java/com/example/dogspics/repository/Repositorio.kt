@@ -22,5 +22,6 @@ class Repositorio(private val api: DogApiService, private val dao: PerroDao) {
 
     suspend fun perroRandom() =  api.perroRandom()
 
-    suspend fun buscarRaza(busqueda:String) = api.buscarRaza(busqueda)
+    suspend fun buscarRazaAPI(busqueda:String) = api.buscarRaza(busqueda)
+    suspend fun buscarRazaDB(busqueda:String) = dao.buscadorRaza(busqueda)
 }

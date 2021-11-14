@@ -25,4 +25,8 @@ interface PerroDao {
     @Query("SELECT * FROM favoritos")
     fun listadoDeFavoritos():Flow<List<PerroFavorito>>
 
+    @Query("SELECT * FROM listado_razas where raza =:raza")
+    fun buscadorRaza(raza:String) : Flow<List<ListadoRazaDB>>
+
+
 }

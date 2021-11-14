@@ -69,7 +69,7 @@ class RazaComparator: DiffUtil.ItemCallback<ListadoRazaDB>() {
     }
 
     override fun areContentsTheSame(oldItem: ListadoRazaDB, newItem: ListadoRazaDB): Boolean {
-        return oldItem.id == newItem.id
+        return oldItem.raza == newItem.raza
     }
 
 }

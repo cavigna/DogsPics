@@ -5,9 +5,19 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "listado_razas")
 data class ListadoRazaDB(
+    @PrimaryKey
+    val raza:String = "",
+    //var subRaza : List<String> = listOf("")
+
+)
+
+/*
+@Entity(tableName = "listado_razas")
+data class ListadoRazaDB(
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0,
     val raza:String = "",
     //var subRaza : List<String> = listOf("")
 
 )
+ */

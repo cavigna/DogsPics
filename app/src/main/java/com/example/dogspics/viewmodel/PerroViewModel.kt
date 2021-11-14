@@ -87,13 +87,19 @@ class PerroViewModel(private val repositorio: Repositorio) : ViewModel() {
 
         viewModelScope.launch {
             try {
-                val respuestaExitosa = repositorio.buscarRaza(nombreRaza).body()!!
+                val respuestaExitosa = repositorio.buscarRazaAPI(nombreRaza).body()!!
                 respuestaBuscar.postValue(respuestaExitosa)
             }catch (e: Exception){
                 respuestaBuscar.postValue(NetworkResult.Error(e.message))
             }
         }
 
+    }
+
+    fun buscadorRazaDB(nombreRaza: String){
+        viewModelScope.launch {
+            razaSeleccionada = repositorio.buscarRazaDB(nombreRaza).asLiveData().value?.get(0)?.raza.toString()
+        }
     }
 
 

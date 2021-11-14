@@ -25,24 +25,16 @@ class MainActivity : AppCompatActivity() {
 
         binding.bottomNav.setOnItemSelectedListener {
             when (it.itemId) {
+                R.id.home_menu-> navController.navigate(R.id.homeFragment)
                 R.id.listado_menu-> navController.navigate(R.id.listFragment)
                 R.id.favoritos_menu-> navController.navigate(R.id.favFragment)
             }
             true
         }
 
-        funcionFueradeMain() // ==> llamado DENTRO DE MAIN
-    }
-
-    fun funcionFueradeMain(){ // ==> declaracion FUERA de MAIN
-        //contenido
-    }
-
-    fun otraFuncion(){
 
     }
+
+
 }
 
-/*
-https://dog.ceo/api/breed/hound/basset/images
- */
