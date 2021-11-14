@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import coil.load
 import com.example.dogspics.application.PerroApplication
 import com.example.dogspics.databinding.FragmentHomeBinding
 import com.example.dogspics.viewmodel.PerroModelFactory
@@ -35,7 +36,11 @@ class HomeFragment : Fragment() {
     ): View? {
         binding = FragmentHomeBinding.inflate(layoutInflater, container, false)
 
-
+        viewModel.perroRandom.observe(viewLifecycleOwner, {
+            with(binding){
+                imageViewRandom.load(it.imgUrl)
+            }
+        })
 
         return binding.root
 

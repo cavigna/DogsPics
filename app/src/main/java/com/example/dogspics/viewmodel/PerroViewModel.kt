@@ -4,9 +4,12 @@ import androidx.lifecycle.*
 import com.example.dogspics.model.ListadoRazaDB
 import com.example.dogspics.model.PerroFavorito
 import com.example.dogspics.model.PerroImagenes
+import com.example.dogspics.model.PerroRandom
+import com.example.dogspics.network.NetworkResult
 import com.example.dogspics.repository.Repositorio
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
+import java.lang.Exception
 
 class PerroViewModel(private val repositorio: Repositorio) : ViewModel() {
 
@@ -20,19 +23,24 @@ class PerroViewModel(private val repositorio: Repositorio) : ViewModel() {
 
     var razaSeleccionada = ""
 
+    private var _perroRandom = MutableLiveData<PerroRandom>()
+    val perroRandom: LiveData<PerroRandom> = _perroRandom
+
+    var respuestaBuscar = MutableLiveData<NetworkResult<PerroImagenes>>()
+
     init {
         agregarListadoRaza()
+
+        traerPerroRandom()
     }
 
-    fun imagenesPorRaza(nombreRaza:String){
+    fun imagenesPorRaza(nombreRaza: String) {
 
         viewModelScope.launch(IO) {
             _listadoImagenesPorRaza.postValue(repositorio.imagenesPorRaza(nombreRaza))
         }
 
     }
-
-
 
 
     fun agregarListadoRaza() {
@@ -52,7 +60,7 @@ class PerroViewModel(private val repositorio: Repositorio) : ViewModel() {
         }
     }
 
-    fun agregarFavorito(perro: PerroFavorito){
+    fun agregarFavorito(perro: PerroFavorito) {
 
         viewModelScope.launch {
             repositorio.agegarFavorito(perro)
@@ -60,12 +68,33 @@ class PerroViewModel(private val repositorio: Repositorio) : ViewModel() {
 
     }
 
-    fun borrarFavorito(perro: PerroFavorito){
+    fun borrarFavorito(perro: PerroFavorito) {
         viewModelScope.launch {
             repositorio.borrarFavorito(perro)
         }
     }
 
+    fun traerPerroRandom() {
+        viewModelScope.launch(IO) {
+            _perroRandom.postValue(repositorio.perroRandom())
+
+        }
+    }
+
+
+    fun buscarRaza(nombreRaza: String){
+        respuestaBuscar.postValue(NetworkResult.Loading())
+
+        viewModelScope.launch {
+            try {
+                val respuestaExitosa = repositorio.buscarRaza(nombreRaza).body()!!
+                respuestaBuscar.postValue(respuestaExitosa)
+            }catch (e: Exception){
+                respuestaBuscar.postValue(NetworkResult.Error(e.message))
+            }
+        }
+
+    }
 
 
 }

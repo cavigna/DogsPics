@@ -19,4 +19,8 @@ class Repositorio(private val api: DogApiService, private val dao: PerroDao) {
     suspend fun borrarFavorito(perro: PerroFavorito) = dao.eliminarFavorito(perro)
 
     fun listadoFavoritos() = dao.listadoDeFavoritos()
+
+    suspend fun perroRandom() =  api.perroRandom()
+
+    suspend fun buscarRaza(busqueda:String) = api.buscarRaza(busqueda)
 }
