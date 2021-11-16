@@ -67,7 +67,7 @@ class HomeFragment : Fragment() {
             override fun onQueryTextSubmit(p0: String?): Boolean {
                 val razaBuscada =  viewModel.razaSeleccionada
                 viewModel.buscadorRazaDB(p0!!)
-               if (razaBuscada.isNotEmpty()){
+               if (razaBuscada != ""){
                     val bundle = Bundle()
                     bundle.putString("raza", p0)
                     findNavController().navigate(R.id.action_homeFragment_to_detailsFragment, bundle)
@@ -85,6 +85,9 @@ class HomeFragment : Fragment() {
             }
 
         })
+
+
+
 
 
         return binding.root

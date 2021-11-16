@@ -2,17 +2,21 @@ package com.example.dogspics
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import com.example.dogspics.application.PerroApplication
 import com.example.dogspics.databinding.ActivityMainBinding
+import com.example.dogspics.viewmodel.PerroModelFactory
+import com.example.dogspics.viewmodel.PerroViewModel
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
 
-//    private val viewModel: PerroViewModel by viewModels {
-//        PerroModelFactory((application as PerroApplication).repositorio)
-//    }
+    private val viewModel: PerroViewModel by viewModels {
+        PerroModelFactory((application as PerroApplication).repositorio)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
