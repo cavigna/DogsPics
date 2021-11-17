@@ -2,6 +2,7 @@ package com.example.dogspics.fragments.ui
 
 import android.app.Application
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.SearchView
 import android.widget.SearchView.OnQueryTextListener
 import android.widget.Toast
+import androidx.annotation.MainThread
 
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -20,6 +22,7 @@ import com.example.dogspics.model.PerroFavorito
 import com.example.dogspics.network.NetworkResult
 import com.example.dogspics.viewmodel.PerroModelFactory
 import com.example.dogspics.viewmodel.PerroViewModel
+import kotlinx.coroutines.runBlocking
 
 class HomeFragment : Fragment() {
 
@@ -45,6 +48,8 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentHomeBinding.inflate(layoutInflater, container, false)
+
+
 
         viewModel.perroRandom.observe(viewLifecycleOwner, {
             with(binding){
@@ -85,6 +90,18 @@ class HomeFragment : Fragment() {
             }
 
         })
+//
+//        runBlocking {
+//
+//            viewModel.imagenesPorRaza("hound")
+//
+//            viewModel.listadoImagenesPorRaza.observe(viewLifecycleOwner, {
+//                Log.i("probando", viewModel.listadoImagenesPorRaza.value.toString())
+//
+//            })
+//            Log.i("probando", viewModel.imagenesPorRaza("hound").toString())
+//
+//        }
 
 
 

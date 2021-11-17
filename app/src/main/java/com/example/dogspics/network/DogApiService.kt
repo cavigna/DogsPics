@@ -17,6 +17,8 @@ interface DogApiService {
 
     //https://dog.ceo/api/breeds/image/random
 
+    //https://dog.ceo/api/
+
     @GET("breeds/image/random")
     suspend fun perroRandom(): PerroRandom
 
@@ -24,4 +26,16 @@ interface DogApiService {
     @GET("breed/{nombreRaza}/images")
     suspend fun buscarRaza(@Path("nombreRaza") nombreRaza:String) : Response<NetworkResult<PerroImagenes>>
 
+    @GET("breeds/image/random")
+    suspend fun perroRandomTest(): Response<PerroRandom>
+
+
+
 }
+
+/*
+{
+    "message": "https://images.dog.ceo/breeds/keeshond/n02112350_9580.jpg",
+    "status": "success"
+}
+ */
