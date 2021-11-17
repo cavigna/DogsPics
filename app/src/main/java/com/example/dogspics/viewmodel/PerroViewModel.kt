@@ -45,7 +45,7 @@ class PerroViewModel(private val repositorio: Repositorio) : ViewModel() {
 
     fun agregarListadoRaza() {
         viewModelScope.launch {
-            val listado = repositorio.listadoRazaAPI()
+            val listado = repositorio.listadoRazaAPI().message
             val listadoRazaDB = mutableListOf<ListadoRazaDB>()
 
             for (s in listado) {

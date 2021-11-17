@@ -7,7 +7,8 @@ import com.example.dogspics.network.DogApiService
 
 class Repositorio(private val api: DogApiService, private val dao: PerroDao) {
 
-    suspend fun listadoRazaAPI() = api.listadoPerroAPI().message
+    suspend fun listadoRazaAPI() = api.listadoPerroAPI()
+    //suspend fun listadoRazaAPI() = api.listadoPerroAPI().message
     suspend fun imagenesPorRaza(nombreRaza : String) = api.imagenesPorRaza(nombreRaza)
 
     suspend fun agregarListaRazaDB(listadoPerro: List<ListadoRazaDB>)

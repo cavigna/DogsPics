@@ -15,6 +15,9 @@ import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.test.TestCoroutineDispatcher
+import kotlinx.coroutines.test.TestCoroutineScope
+import kotlinx.coroutines.test.runBlockingTest
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.*
@@ -38,6 +41,9 @@ class RemoteTest {
 
     private lateinit var database: BaseDeDatos
     private lateinit var dao: PerroDao
+
+    private val dispatcher = TestCoroutineDispatcher()
+    private val testScope = TestCoroutineScope(dispatcher)
 
 
     @Before
@@ -87,7 +93,7 @@ class RemoteTest {
                     )
             )
 
-            runBlocking {
+            testScope.launch {
                 val perro = repositorioTest.perroRandomTest().body()
 
 
@@ -108,15 +114,15 @@ class RemoteTest {
             enqueue(
                 MockResponse()
                     .setBody(
-                        FileReader.readStringFromFile("respuesta_falsa_perro_random.json")
+                        FileReader.readStringFromFile("mock_listado.json")
                     )
             )
 
-            runBlocking {
-                val listadoApi = repositorio.listadoRazaAPI()
-                val listadoMock = repositorioTest.listadoRazaAPI()
+            testScope.launch {
+                val listadoApi = repositorio.listadoRazaAPI().message
+                val listadoMock = repositorioTest.listadoRazaAPI().message
 
-                assertThat(listadoApi.size).isEqualTo(listadoMock.size)
+                assertThat(listadoApi).isEqualTo(listadoMock)
             }
         }
     }
@@ -129,17 +135,17 @@ class RemoteTest {
                     FileReader.readStringFromFile("mock_raza.json")
                 )
 
-            GlobalScope.launch {
+           testScope.launch {
                 val listadoApi = repositorio.imagenesPorRaza("labrador").imagenes
                 val listadoMock = repositorioTest.imagenesPorRaza("hound").imagenes
 
-                assertThat(listadoApi.size).isEqualTo(listadoMock.size)
+                assertThat(listadoApi).isEqualTo(listadoMock)
             }
 
 
         }
     }
 
-
 }
+
 
